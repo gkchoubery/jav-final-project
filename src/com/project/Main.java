@@ -1,6 +1,5 @@
 package com.project;
 
-import com.project.employee.Employee;
 import com.project.exceptions.InvalidChoiceException;
 import com.project.payslip.EmployeePayslip;
 import com.project.utilities.Utils;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public void writePayrollToFile(Employee employee) {
+    public static void writePayrollToFile(String data) {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         String fileName = "payroll.txt";
@@ -29,7 +28,7 @@ public class Main {
             }
             fileWriter = new FileWriter(file, true);
             bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(employee.toString());
+            bufferedWriter.write(data);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -44,6 +43,11 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void println(String data) {
+        System.out.println(data);
+        writePayrollToFile(data);
     }
 
 
@@ -74,13 +78,19 @@ public class Main {
                         }
                         break;
                     case '2':
-                        System.out.println(Utils.centerPad("Generating payroll for " + monthYear, 70, '*') + "\n\n");
-                        payslipManagement.processPayslips();
-                        System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
+                        println(Utils.centerPad("Generating payroll information for " + monthYear,
+                                80, '*') + "\n\n");
+
+                        for (EmployeePayslip payslip :
+                                payslipManagement.getEmployeePayslips()) {
+                            println(payslip.toString());
+                        }
+
+                        println(Utils.rightPad("Total number of employee payslips processed: ") +
                                 payslipManagement.getNumberOfProcessedPayslips());
-                        System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +
+                        println(Utils.rightPad("Total number of faculty payslips processed: ") +
                                 payslipManagement.getNumberOfFacultyProcessed());
-                        System.out.println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
+                        println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
                                 payslipManagement.getNumberOfNonFacultyProcessed());
                         break;
                     case '3':
