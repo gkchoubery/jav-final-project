@@ -7,6 +7,8 @@ public abstract class EmployeePayslip {
 
     private Employee employee;
     protected double totalHoursWorked;
+    protected static final double FULL_TIME_HOURS = 160;
+    protected double hourlyRate;
 
     public EmployeePayslip() {
     }
@@ -48,6 +50,20 @@ public abstract class EmployeePayslip {
 
     @Override
     public String toString() {
-        return employee.toString();
+        return employee.toString() +
+                Utils.centerPad("Payslip Information", 50, '-') +
+                "\n" +
+                Utils.rightPad("Hourly rate: ", Utils.LEFT_HEADING_LENGTH) + "$" + getHourlyRate() +
+                "\n" +
+                Utils.rightPad("Total hours worked: ", Utils.LEFT_HEADING_LENGTH) + totalHoursWorked +
+                "\n" +
+                Utils.rightPad("Gross Salary: ", Utils.LEFT_HEADING_LENGTH) + "$" + getGrossSalary() +
+                "\n" +
+                Utils.rightPad("Income Tax Deduction: ", Utils.LEFT_HEADING_LENGTH) + "$" + getIncomeTaxAmount() +
+                "\n" +
+                Utils.rightPad("Health Surcharge Fee: ", Utils.LEFT_HEADING_LENGTH) + "$" + getHealthSurchargeFee() +
+                "\n" +
+                Utils.rightPad("Net Income: ", Utils.LEFT_HEADING_LENGTH) + "$" + getNetSalary() +
+                "\n";
     }
 }

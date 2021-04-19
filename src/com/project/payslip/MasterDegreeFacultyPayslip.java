@@ -20,4 +20,9 @@ public class MasterDegreeFacultyPayslip extends FacultyPayslip {
     public double getTeachingAllowance() {
         return 1500;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -46,7 +46,7 @@ public class Main {
     }
 
     public static void println(String data) {
-        System.out.println(data);
+//        System.out.println(data);
         writePayrollToFile(data);
     }
 
@@ -87,11 +87,15 @@ public class Main {
                         }
 
                         println(Utils.rightPad("Total number of employee payslips processed: ") +
-                                payslipManagement.getNumberOfProcessedPayslips());
+                                payslipManagement.getNumberOfProcessedPayslips() + "\n");
                         println(Utils.rightPad("Total number of faculty payslips processed: ") +
-                                payslipManagement.getNumberOfFacultyProcessed());
+                                payslipManagement.getNumberOfFacultyProcessed() + "\n");
                         println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
-                                payslipManagement.getNumberOfNonFacultyProcessed());
+                                payslipManagement.getNumberOfNonFacultyProcessed() + "\n");
+                        println("\n\n");
+                        println(Utils.centerPad("End of report", 80, '*') + "\n\n\n");
+
+                        System.out.println("Payroll data has been saved to file.");
                         break;
                     case '3':
                         System.out.println("\nThank you for using the automated portal." +
