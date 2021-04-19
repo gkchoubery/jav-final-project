@@ -25,10 +25,6 @@ public class EmployeePayslipManagement {
         return this.employeePayslips.add(employeePayslip);
     }
 
-    public List<EmployeePayslip> getEmployeePayslips() {
-        return this.employeePayslips;
-    }
-
     public int getNumberOfProcessedPayslips() {
         return this.employeePayslips.size();
     }
@@ -51,6 +47,13 @@ public class EmployeePayslipManagement {
             }
         }
         return count;
+    }
+
+    public void processPayslips() {
+        for (EmployeePayslip payslip :
+                employeePayslips) {
+            System.out.println(payslip);
+        }
     }
 
     public EmployeePayslip generateNewEmployeePayslip(Scanner reader) throws InvalidChoiceException, InputMismatchException {

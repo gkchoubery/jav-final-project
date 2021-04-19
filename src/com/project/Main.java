@@ -76,6 +76,7 @@ public class Main {
                         break;
                     case '2':
                         System.out.println(Utils.centerPad("Generating payroll for " + monthYear, 70, '*') + "\n\n");
+                        payslipManagement.processPayslips();
                         System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
                                 payslipManagement.getNumberOfProcessedPayslips());
                         System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +

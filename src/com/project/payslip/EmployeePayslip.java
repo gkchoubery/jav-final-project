@@ -1,6 +1,7 @@
 package com.project.payslip;
 
 import com.project.employee.Employee;
+import com.project.utilities.Utils;
 
 public abstract class EmployeePayslip {
 
@@ -41,4 +42,16 @@ public abstract class EmployeePayslip {
 
     public abstract double getGrossSalary();
 
+    public double getNetSalary() {
+        return getGrossSalary() - getIncomeTaxAmount() - getHealthSurchargeFee();
+    }
+
+    @Override
+    public String toString() {
+        return employee +
+                Utils.getPaddedString(String.valueOf(getGrossSalary()), Utils.GROSS_SALARY) +
+                Utils.getPaddedString(String.valueOf(getIncomeTaxAmount()), Utils.INCOME_TAX) +
+                Utils.getPaddedString(String.valueOf(getHealthSurchargeFee()), Utils.HEALTH_FEE) +
+                Utils.getPaddedString(String.valueOf(getNetSalary()), Utils.NET_SALARY);
+    }
 }
