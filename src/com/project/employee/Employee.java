@@ -42,14 +42,6 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public char getEmployeeType() {
         return employeeType;
     }

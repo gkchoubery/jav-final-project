@@ -8,7 +8,6 @@ public abstract class EmployeePayslip {
     private double totalHoursWorked;
 
     public EmployeePayslip() {
-
     }
 
     public EmployeePayslip(Employee employee, double totalHoursWorked) {

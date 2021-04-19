@@ -4,6 +4,9 @@ import com.project.employee.Employee;
 
 public class BachelorDegreeFacultyPayslip extends FacultyPayslip {
 
+    public BachelorDegreeFacultyPayslip() {
+    }
+
     public BachelorDegreeFacultyPayslip(Employee employee, double totalHoursWorked) {
         super(employee, totalHoursWorked);
     }
