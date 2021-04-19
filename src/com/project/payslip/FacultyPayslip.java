@@ -12,4 +12,9 @@ public abstract class FacultyPayslip extends EmployeePayslip {
     }
 
     public abstract double getTeachingAllowance();
+
+    @Override
+    public double getGrossSalary() {
+        return (getHourlyRate() * totalHoursWorked) + getTeachingAllowance();
+    }
 }

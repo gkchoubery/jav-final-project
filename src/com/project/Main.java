@@ -3,7 +3,6 @@ package com.project;
 import com.project.employee.Employee;
 import com.project.exceptions.InvalidChoiceException;
 import com.project.payslip.EmployeePayslip;
-import com.project.payslip.EmployeePayslipManagement;
 import com.project.utilities.Utils;
 
 import java.io.BufferedWriter;
@@ -51,8 +50,10 @@ public class Main {
     public static void main(String[] args) {
 
         EmployeePayslipManagement payslipManagement = new EmployeePayslipManagement();
-        System.out.println("Welcome to the automated payslip application!");
+        System.out.println("Welcome to the automated payslip application!\n\n");
         Scanner reader = new Scanner(System.in);
+        System.out.print("Please enter the month and year you want to process payslips for (MONTH, yyyy): ");
+        String monthYear = reader.nextLine();
 
         char choice;
         do {
@@ -74,7 +75,7 @@ public class Main {
                         System.out.println("\n");
                         break;
                     case '2':
-                        System.out.println("**********************Generating payroll**********************\n\n");
+                        System.out.println(Utils.centerPad("Generating payroll for " + monthYear, 70, '*') + "\n\n");
                         System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
                                 payslipManagement.getNumberOfProcessedPayslips());
                         System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +

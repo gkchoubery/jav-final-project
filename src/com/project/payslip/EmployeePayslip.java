@@ -5,7 +5,7 @@ import com.project.employee.Employee;
 public abstract class EmployeePayslip {
 
     private Employee employee;
-    private double totalHoursWorked;
+    protected double totalHoursWorked;
 
     public EmployeePayslip() {
     }
@@ -23,6 +23,22 @@ public abstract class EmployeePayslip {
         this.employee = employee;
     }
 
+    public double getHealthSurchargeFee() {
+        if (getGrossSalary() > 3000) {
+            return 33;
+        } else {
+            return 19.20;
+        }
+    }
+
+    public double getIncomeTaxAmount() {
+        if (getGrossSalary() < 2500) return 0;
+        return (2500 - getGrossSalary()) * 0.25;
+
+    }
+
     public abstract double getHourlyRate();
+
+    public abstract double getGrossSalary();
 
 }

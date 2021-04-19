@@ -1,7 +1,11 @@
-package com.project.payslip;
+package com.project;
 
 import com.project.employee.*;
 import com.project.exceptions.InvalidChoiceException;
+import com.project.payslip.BachelorDegreeFacultyPayslip;
+import com.project.payslip.EmployeePayslip;
+import com.project.payslip.MasterDegreeFacultyPayslip;
+import com.project.payslip.NonFacultyPayslip;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
