@@ -72,7 +72,6 @@ public class Main {
                             payslipManagement.addEmployeePayslip(employeePayslip);
                             System.out.println("Employee payslip processed successfully.");
                         }
-                        System.out.println("\n");
                         break;
                     case '2':
                         System.out.println(Utils.centerPad("Generating payroll for " + monthYear, 70, '*') + "\n\n");

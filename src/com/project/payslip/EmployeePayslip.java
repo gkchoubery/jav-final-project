@@ -34,7 +34,7 @@ public abstract class EmployeePayslip {
 
     public double getIncomeTaxAmount() {
         if (getGrossSalary() < 2500) return 0;
-        return (2500 - getGrossSalary()) * 0.25;
+        return (getGrossSalary() - 2500) * 0.25;
 
     }
 
@@ -48,10 +48,6 @@ public abstract class EmployeePayslip {
 
     @Override
     public String toString() {
-        return employee +
-                Utils.getPaddedString(String.valueOf(getGrossSalary()), Utils.GROSS_SALARY) +
-                Utils.getPaddedString(String.valueOf(getIncomeTaxAmount()), Utils.INCOME_TAX) +
-                Utils.getPaddedString(String.valueOf(getHealthSurchargeFee()), Utils.HEALTH_FEE) +
-                Utils.getPaddedString(String.valueOf(getNetSalary()), Utils.NET_SALARY);
+        return employee.toString();
     }
 }

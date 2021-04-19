@@ -2,8 +2,6 @@ package com.project.employee;
 
 import com.project.utilities.Utils;
 
-import java.util.Objects;
-
 public class Employee {
 
     protected String ID, firstName, lastName, department;
@@ -44,6 +42,14 @@ public class Employee {
         this.lastName = lastName;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
+
     public char getEmployeeType() {
         return employeeType;
     }
@@ -59,8 +65,13 @@ public class Employee {
 
     @Override
     public String toString() {
-        return Utils.getPaddedString(ID, Utils.ID) +
-                Utils.getPaddedString(firstName + " " + lastName, Utils.FULL_NAME) +
-                Utils.getPaddedString(getFullEmployeeType(), Utils.EMPLOYEE_TYPE);
+        return Utils.rightPad(Utils.rightPad("Employee Name: ",
+                Utils.LEFT_HEADING_LENGTH) + getFullName(), Utils.LEFT_TEXT_LENGTH) +
+                Utils.rightPad("Employee ID: ", 15) + getID() +
+                "\n" +
+                Utils.rightPad(Utils.rightPad("Department Name: ",
+                        Utils.LEFT_HEADING_LENGTH) + getDepartment(), Utils.LEFT_TEXT_LENGTH) +
+                Utils.rightPad("Employee Type: ", 15) + getFullEmployeeType() +
+                "\n";
     }
 }

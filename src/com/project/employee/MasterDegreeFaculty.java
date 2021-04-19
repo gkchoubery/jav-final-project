@@ -13,4 +13,9 @@ public class MasterDegreeFaculty extends FacultyEmployee {
     public char getDegree() {
         return 'M';
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
