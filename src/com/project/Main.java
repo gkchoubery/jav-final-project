@@ -13,10 +13,12 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void writePayrollToFile(String data) {
+    static final String FILE_NAME = "payroll.txt";
+
+    public static void writeDataToFile(String data) {
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
-        String fileName = "payroll.txt";
+        String fileName = FILE_NAME;
         try {
             File file = new File(fileName);
             if (!file.exists()) {
@@ -45,9 +47,9 @@ public class Main {
         }
     }
 
-    public static void println(String data) {
+    public static void printToFile(String data) {
 //        System.out.println(data);
-        writePayrollToFile(data);
+        writeDataToFile(data);
     }
 
 
@@ -78,28 +80,28 @@ public class Main {
                         }
                         break;
                     case '2':
-                        println(Utils.centerPad("Generating payroll information for " + monthYear,
+                        printToFile(Utils.centerPad("Generating payroll information for " + monthYear,
                                 80, '*') + "\n\n");
 
                         for (EmployeePayslip payslip :
                                 payslipManagement.getEmployeePayslips()) {
-                            println(payslip.toString());
+                            printToFile(payslip.toString());
                         }
 
-                        println(Utils.rightPad("Total number of employee payslips processed: ") +
+                        System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
                                 payslipManagement.getNumberOfProcessedPayslips() + "\n");
-                        println(Utils.rightPad("Total number of faculty payslips processed: ") +
+                        System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +
                                 payslipManagement.getNumberOfFacultyProcessed() + "\n");
-                        println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
+                        System.out.println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
                                 payslipManagement.getNumberOfNonFacultyProcessed() + "\n");
-                        println("\n\n");
-                        println(Utils.centerPad("End of report", 80, '*') + "\n\n\n");
 
-                        System.out.println("Payroll data has been saved to file.");
+                        printToFile(Utils.centerPad("End of report", 80, '*') + "\n\n\n");
+
+                        System.out.println("Payroll data has been saved to file: \"" + FILE_NAME + "\"");
                         break;
                     case '3':
                         System.out.println("\nThank you for using the automated portal." +
-                                "\nIf you generated payroll slips, you will find the information in a file as well.");
+                                "\nIf you generated payroll slips, you will find all the processed data in \"" + FILE_NAME + "\"");
                         break;
                     default:
                         throw new InvalidChoiceException("This choice is not allowed at this moment");

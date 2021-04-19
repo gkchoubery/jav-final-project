@@ -25,8 +25,8 @@ public class Utils {
         if (inputString.length() >= length) return inputString;
         int padding = (length - inputString.length()) / 2;
         StringBuilder sb = new StringBuilder(inputString);
-        sb.insert(0, pad("", padding, '*', true));
-        sb.append(pad("", padding, '*', false));
+        sb.insert(0, pad("", padding, paddingCharacter, true));
+        sb.append(pad("", padding, paddingCharacter, false));
         return sb.toString();
     }
 }

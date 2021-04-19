@@ -2,7 +2,7 @@ package com.project.employee;
 
 import com.project.utilities.Utils;
 
-public class Employee {
+public abstract class Employee {
 
     protected String ID, firstName, lastName, department;
     protected char employeeType;
