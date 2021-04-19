@@ -23,14 +23,6 @@ public abstract class EmployeePayslip {
         this.employee = employee;
     }
 
-    public double getTotalHoursWorked() {
-        return totalHoursWorked;
-    }
-
-    public void setTotalHoursWorked(double totalHoursWorked) {
-        this.totalHoursWorked = totalHoursWorked;
-    }
-
     public abstract double getHourlyRate();
 
 }
