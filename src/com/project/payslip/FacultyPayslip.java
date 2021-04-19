@@ -1,8 +1,12 @@
 package com.project.payslip;
 
-public class FacultyPayslip extends EmployeePayslip {
+import com.project.employee.Employee;
 
-    public FacultyPayslip() {
-        super();
+public abstract class FacultyPayslip extends EmployeePayslip {
+
+    public FacultyPayslip(Employee employee, double totalHoursWorked) {
+        super(employee, totalHoursWorked);
     }
+
+    public abstract double getTeachingAllowance();
 }

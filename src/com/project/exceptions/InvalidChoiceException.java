@@ -6,7 +6,7 @@ public class InvalidChoiceException extends Exception {
         super("Invalid choice selected.");
     }
 
-    public InvalidChoiceException(String message)  {
+    public InvalidChoiceException(String message) {
         super(message);
     }
 }

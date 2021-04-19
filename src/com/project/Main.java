@@ -1,40 +1,29 @@
 package com.project;
 
+import com.project.employee.BachelorDegreeFaculty;
 import com.project.employee.Employee;
-import com.project.employee.FacultyEmployee;
+import com.project.employee.MasterDegreeFaculty;
 import com.project.employee.NonFacultyEmployee;
 import com.project.exceptions.InvalidChoiceException;
+import com.project.payslip.BachelorDegreeFacultyPayslip;
+import com.project.payslip.EmployeePayslip;
+import com.project.payslip.MasterDegreeFacultyPayslip;
+import com.project.payslip.NonFacultyPayslip;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    private final List<Employee> employees;
-
-    public Main() {
-        employees = new ArrayList<>();
-    }
-
-    public boolean addEmployee(Employee e) {
-        return this.employees.add(e);
-    }
-
-    public List<Employee> getEmployees() {
-        return this.employees;
-    }
-
-    public Employee generateNewEmployee(Scanner reader) throws InvalidChoiceException, InputMismatchException {
-        Employee employee = null;
+    public EmployeePayslip generateNewEmployeePayslip(Scanner reader) throws InvalidChoiceException, InputMismatchException {
+        EmployeePayslip employeePayslip;
 
         String ID, firstName, lastName, departmentName;
-        float hoursWorked;
+        double totalHoursWorked;
         char employeeType;
 
         System.out.println("Please enter the following details about the employee");
@@ -48,22 +37,46 @@ public class Main {
         departmentName = reader.nextLine();
         System.out.print("Total hours worked in a month: ");
         try {
-            hoursWorked = reader.nextFloat();
+            totalHoursWorked = reader.nextDouble();
         } catch (InputMismatchException e) {
             throw new InputMismatchException("Invalid data provided. Only number values allowed.");
         }
         reader.nextLine();
-        System.out.print("Faculty type (F/f/N/n): ");
+        System.out.print("Employee type - Faculty/Non-faculty (F/f/N/n): ");
         employeeType = reader.next().toUpperCase().charAt(0);
         reader.nextLine();
+
+        Employee employee;
+
         if (employeeType == 'F') {
-            employee = new FacultyEmployee(ID, firstName, lastName, departmentName, hoursWorked);
+            System.out.print("Highest qualification degree (B/b/M/m): ");
+            char degree = reader.nextLine().toUpperCase().charAt(0);
+            if (degree == 'B') {
+                employee = new BachelorDegreeFaculty(ID, firstName, lastName, departmentName);
+                employeePayslip = new BachelorDegreeFacultyPayslip(employee, totalHoursWorked);
+            } else if (degree == 'M') {
+                employee = new MasterDegreeFaculty(ID, firstName, lastName, departmentName);
+                employeePayslip = new MasterDegreeFacultyPayslip(employee, totalHoursWorked);
+            } else {
+                throw new InvalidChoiceException("Faculty can only have a Bachelors degree or Masters degree.");
+            }
+
+
         } else if (employeeType == 'N') {
-            employee = new NonFacultyEmployee(ID, firstName, lastName, departmentName, hoursWorked);
+            System.out.print("Monthly salary: ");
+            double monthlySalary;
+            try {
+                monthlySalary = reader.nextDouble();
+            } catch (InputMismatchException e) {
+                throw new InputMismatchException("Invalid data provided. Only number values allowed.");
+            }
+            reader.nextLine();
+            employee = new NonFacultyEmployee(ID, firstName, lastName, departmentName);
+            employeePayslip = new NonFacultyPayslip(employee, totalHoursWorked, monthlySalary);
         } else {
             throw new InvalidChoiceException("Employee type can only be a Faculty or a Non-Faculty");
         }
-        return employee;
+        return employeePayslip;
     }
 
     public void writePayrollToFile(Employee employee) {
@@ -115,11 +128,11 @@ public class Main {
                 choice = reader.nextLine().charAt(0);
                 switch (choice) {
                     case '1':
-                        Employee employee = app.generateNewEmployee(reader);
-                        if (employee == null) {
-                            System.out.println("Error while adding the new employee. Please try again.");
+                        EmployeePayslip employeePayslip = app.generateNewEmployeePayslip(reader);
+                        if (employeePayslip == null) {
+                            System.out.println("Error while processing the employee payslip. Please try again.");
                         } else {
-                            System.out.println("Employee added successfully.");
+                            System.out.println("Employee payslip processed successfully.");
                         }
                         System.out.println("\n");
                         break;
@@ -142,6 +155,7 @@ public class Main {
                 reader.nextLine();
             }
         } while (choice != '3');
+        reader.close();
 
     }
 }
