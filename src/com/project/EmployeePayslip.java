@@ -1,14 +1,11 @@
-package com.project.payslip;
-
-import com.project.employee.Employee;
-import com.project.utilities.Utils;
+package com.project;
 
 public abstract class EmployeePayslip {
 
     private Employee employee;
     protected double totalHoursWorked;
     protected static final double FULL_TIME_HOURS = 160;
-    protected double hourlyRate;
+    protected static final double TAX_FREE_ALLOWANCE = 2500;
 
     public EmployeePayslip() {
     }
@@ -22,10 +19,6 @@ public abstract class EmployeePayslip {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public double getHealthSurchargeFee() {
         if (getGrossSalary() > 3000) {
             return 33;
@@ -35,18 +28,22 @@ public abstract class EmployeePayslip {
     }
 
     public double getIncomeTaxAmount() {
-        if (getGrossSalary() < 2500) return 0;
-        return (getGrossSalary() - 2500) * 0.25;
+        if (getGrossSalary() < TAX_FREE_ALLOWANCE) return 0;
+        return (getGrossSalary() - TAX_FREE_ALLOWANCE) * 0.25;
 
+    }
+
+    public double getDeductions() {
+        return getIncomeTaxAmount() + getHealthSurchargeFee();
+    }
+
+    public double getNetSalary() {
+        return getGrossSalary() - getDeductions();
     }
 
     public abstract double getHourlyRate();
 
     public abstract double getGrossSalary();
-
-    public double getNetSalary() {
-        return getGrossSalary() - getIncomeTaxAmount() - getHealthSurchargeFee();
-    }
 
     @Override
     public String toString() {

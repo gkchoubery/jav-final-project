@@ -1,4 +1,4 @@
-package com.project.exceptions;
+package com.project;
 
 public class InvalidChoiceException extends Exception {
 

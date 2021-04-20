@@ -1,8 +1,6 @@
-package com.project.employee;
+package com.project;
 
-import com.project.utilities.Utils;
-
-public abstract class Employee {
+public class Employee {
 
     protected String ID, firstName, lastName, department;
     protected char employeeType;
@@ -22,24 +20,12 @@ public abstract class Employee {
         return ID;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getDepartment() {
@@ -57,10 +43,6 @@ public abstract class Employee {
     public String getFullEmployeeType() {
         if (getEmployeeType() == 'F' || getEmployeeType() == 'f') return "Faculty";
         return "Non-Faculty";
-    }
-
-    public void setEmployeeType(char employeeType) {
-        this.employeeType = employeeType;
     }
 
     @Override
