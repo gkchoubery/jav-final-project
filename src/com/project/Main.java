@@ -26,7 +26,7 @@ public class Main {
             }
             fileWriter = new FileWriter(file, true);
             bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(data);
+            bufferedWriter.write(data + "\n");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -56,62 +56,50 @@ public class Main {
         Scanner reader = new Scanner(System.in);
         System.out.print("Please enter the month and year you want to process payslips for (MONTH, yyyy): ");
         String monthYear = reader.nextLine();
-
+        System.out.println("\nAdd details for the employees below...");
+        System.out.println("Note: Once you have added the all the employee data, the report will be generated automatically.\n");
         char choice;
         do {
             try {
-                System.out.println("\nPlease choose from the options below.");
-                System.out.println("1. Add Employee to the system.");
-                System.out.println("2. Generate Payslip information of all employees.");
-                System.out.println("3. Exit Application");
-                choice = reader.nextLine().charAt(0);
-                switch (choice) {
-                    case '1':
-                        EmployeePayslip employeePayslip = payslipManagement.generateNewEmployeePayslip(reader);
-                        if (employeePayslip == null) {
-                            System.out.println("Error while processing the employee payslip. Please try again.");
-                        } else {
-                            payslipManagement.addEmployeePayslip(employeePayslip);
-                            System.out.println("Employee payslip processed successfully.");
-                        }
-                        break;
-                    case '2':
-                        printToFile(Utils.centerPad("Generating payroll information for " + monthYear,
-                                80, '*') + "\n\n");
-
-                        for (EmployeePayslip payslip :
-                                payslipManagement.getEmployeePayslips()) {
-                            printToFile(payslip.toString());
-                        }
-
-                        printToFile(Utils.centerPad("End of report", 80, '*') + "\n\n\n");
-
-                        System.out.println("Payroll data has been saved to file: \"" + FILE_NAME + "\"");
-
-                        System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
-                                payslipManagement.getNumberOfProcessedPayslips());
-                        System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +
-                                payslipManagement.getNumberOfFacultyProcessed());
-                        System.out.println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
-                                payslipManagement.getNumberOfNonFacultyProcessed());
-                        break;
-                    case '3':
-                        System.out.println("\nThank you for using the automated portal." +
-                                "\nIf you generated payroll slips, you will find all the processed data in \"" + FILE_NAME + "\"");
-                        break;
-                    default:
-                        throw new InvalidChoiceException("This choice is not allowed at this moment");
+                EmployeePayslip employeePayslip = payslipManagement.generateNewEmployeePayslip(reader);
+                if (employeePayslip == null) {
+                    System.out.println("Error while processing the employee payslip. Please try again.");
+                } else {
+                    payslipManagement.addEmployeePayslip(employeePayslip);
+                    System.out.println("Employee payslip entered successfully.");
                 }
+                System.out.println("Do you want to add another employee? Choose any key to add another employee or 'N' to exit: ");
+                choice = reader.next().toUpperCase().charAt(0);
+                reader.nextLine();
             } catch (InvalidChoiceException e) {
                 System.out.println("\n" + e.getMessage());
                 System.out.println("Starting over...\n");
-                choice = '0';
+                choice = 'Y';
             } catch (InputMismatchException e) {
                 System.out.println("\n" + e.getMessage());
-                choice = '0';
+                choice = 'Y';
                 reader.nextLine();
             }
-        } while (choice != '3');
+        } while (choice != 'N');
+        System.out.println("\nThank you for using the automated portal." +
+                "\nYou will find all the processed payslips data in \"" + FILE_NAME + "\"");
+        printToFile(Utils.centerPad("Generating payroll information for " + monthYear,
+                80, '*') + "\n\n");
+
+        for (EmployeePayslip payslip :
+                payslipManagement.getEmployeePayslips()) {
+            printToFile(payslip.toString());
+        }
+
+        printToFile(Utils.rightPad("Total number of employee payslips processed: ") +
+                payslipManagement.getNumberOfProcessedPayslips());
+        printToFile(Utils.rightPad("Total number of faculty payslips processed: ") +
+                payslipManagement.getNumberOfFacultyProcessed());
+        printToFile(Utils.rightPad("Total number of non-faculty payslips processed: ") +
+                payslipManagement.getNumberOfNonFacultyProcessed());
+
+        printToFile(Utils.centerPad("End of report", 80, '*') + "\n");
+
         reader.close();
 
     }

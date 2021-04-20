@@ -68,7 +68,8 @@ public class EmployeePayslipManagement {
         }
         reader.nextLine();
         System.out.print("Employee type - Faculty/Non-faculty (F/f/N/n): ");
-        employeeType = reader.nextLine().toUpperCase().charAt(0);
+        employeeType = reader.next().toUpperCase().charAt(0);
+        reader.nextLine();
 
         Employee employee;
         if (employeeType == 'F' || employeeType == 'N') {
