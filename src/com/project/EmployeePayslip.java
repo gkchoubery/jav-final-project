@@ -1,6 +1,6 @@
 package com.project;
 
-public abstract class EmployeePayslip {
+public abstract class EmployeePayslip implements IEndOfFunction {
 
     private Employee employee;
     protected double totalHoursWorked;
@@ -47,7 +47,9 @@ public abstract class EmployeePayslip {
 
     @Override
     public String toString() {
-        return employee.toString() +
+        return Utils.centerPad("Start of Employee payslip", 50, '-') +
+                "\n" +
+                employee.toString() +
                 Utils.centerPad("Payslip Information", 50, '-') +
                 "\n" +
                 Utils.rightPad("Hourly rate: ", Utils.LEFT_HEADING_LENGTH) + "$" + getHourlyRate() +
@@ -62,5 +64,10 @@ public abstract class EmployeePayslip {
                 "\n" +
                 Utils.rightPad("Net Income: ", Utils.LEFT_HEADING_LENGTH) + "$" + getNetSalary() +
                 "\n";
+    }
+
+    @Override
+    public String outputString() {
+        return Utils.centerPad("End of Employee Payslip", 50, '-') + "\n";
     }
 }
