@@ -47,7 +47,7 @@ public class NonFacultyPayslip extends EmployeePayslip {
                 "\n" +
                 Utils.rightPad("Monthly Salary: ", Utils.LEFT_HEADING_LENGTH) + "$" + monthlySalary +
                 "\n" +
-                (getOverTime() > 0 ? Utils.rightPad("Over time: ", Utils.LEFT_HEADING_LENGTH) + "$" + monthlySalary +
+                (getOverTime() > 0 ? Utils.rightPad("Over time: ", Utils.LEFT_HEADING_LENGTH) + getOverTime() + "hours" +
                         "\n" : "") +
                 "\n\n\n";
     }

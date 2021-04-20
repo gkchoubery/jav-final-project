@@ -88,16 +88,16 @@ public class Main {
                             printToFile(payslip.toString());
                         }
 
-                        System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
-                                payslipManagement.getNumberOfProcessedPayslips() + "\n");
-                        System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +
-                                payslipManagement.getNumberOfFacultyProcessed() + "\n");
-                        System.out.println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
-                                payslipManagement.getNumberOfNonFacultyProcessed() + "\n");
-
                         printToFile(Utils.centerPad("End of report", 80, '*') + "\n\n\n");
 
                         System.out.println("Payroll data has been saved to file: \"" + FILE_NAME + "\"");
+
+                        System.out.println(Utils.rightPad("Total number of employee payslips processed: ") +
+                                payslipManagement.getNumberOfProcessedPayslips());
+                        System.out.println(Utils.rightPad("Total number of faculty payslips processed: ") +
+                                payslipManagement.getNumberOfFacultyProcessed());
+                        System.out.println(Utils.rightPad("Total number of non-faculty payslips processed: ") +
+                                payslipManagement.getNumberOfNonFacultyProcessed());
                         break;
                     case '3':
                         System.out.println("\nThank you for using the automated portal." +

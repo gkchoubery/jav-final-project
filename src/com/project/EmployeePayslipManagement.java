@@ -1,10 +1,9 @@
 package com.project;
 
-import com.project.employee.*;
+import com.project.employee.Employee;
 import com.project.exceptions.InvalidChoiceException;
-import com.project.payslip.BachelorDegreeFacultyPayslip;
 import com.project.payslip.EmployeePayslip;
-import com.project.payslip.MasterDegreeFacultyPayslip;
+import com.project.payslip.FacultyPayslip;
 import com.project.payslip.NonFacultyPayslip;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class EmployeePayslipManagement {
     public int getNumberOfFacultyProcessed() {
         int count = 0;
         for (EmployeePayslip employeePayslip : employeePayslips) {
-            if (employeePayslip.getEmployee() instanceof FacultyEmployee) {
+            if (employeePayslip.getEmployee().getEmployeeType() == 'F') {
                 count++;
             }
         }
@@ -46,7 +45,7 @@ public class EmployeePayslipManagement {
     public int getNumberOfNonFacultyProcessed() {
         int count = 0;
         for (EmployeePayslip employeePayslip : employeePayslips) {
-            if (employeePayslip.getEmployee() instanceof NonFacultyEmployee) {
+            if (employeePayslip.getEmployee().getEmployeeType() == 'N') {
                 count++;
             }
         }
@@ -54,8 +53,6 @@ public class EmployeePayslipManagement {
     }
 
     public EmployeePayslip generateNewEmployeePayslip(Scanner reader) throws InvalidChoiceException, InputMismatchException {
-        EmployeePayslip employeePayslip;
-
         String ID, firstName, lastName, departmentName;
         double totalHoursWorked;
         char employeeType;
@@ -77,26 +74,28 @@ public class EmployeePayslipManagement {
         }
         reader.nextLine();
         System.out.print("Employee type - Faculty/Non-faculty (F/f/N/n): ");
-        employeeType = reader.next().toUpperCase().charAt(0);
-        reader.nextLine();
+        employeeType = reader.nextLine().toUpperCase().charAt(0);
 
         Employee employee;
+        if (employeeType == 'F' || employeeType == 'N') {
+            employee = new Employee(ID, firstName, lastName, departmentName, employeeType);
+        } else {
+            throw new InvalidChoiceException("Employee type can only be a Faculty or a Non-Faculty");
+        }
+
+        // Declaring objects
+        EmployeePayslip employeePayslip;
 
         if (employeeType == 'F') {
             System.out.print("Highest qualification degree (B/b/M/m): ");
             char degree = reader.nextLine().toUpperCase().charAt(0);
-            if (degree == 'B') {
-                employee = new BachelorDegreeFaculty(ID, firstName, lastName, departmentName);
-                employeePayslip = new BachelorDegreeFacultyPayslip(employee, totalHoursWorked);
-            } else if (degree == 'M') {
-                employee = new MasterDegreeFaculty(ID, firstName, lastName, departmentName);
-                employeePayslip = new MasterDegreeFacultyPayslip(employee, totalHoursWorked);
+            if (degree == 'B' || degree == 'M') {
+
+                employeePayslip = new FacultyPayslip(employee, totalHoursWorked, degree);
             } else {
                 throw new InvalidChoiceException("Faculty can only have a Bachelors degree or Masters degree.");
             }
-
-
-        } else if (employeeType == 'N') {
+        } else {
             System.out.print("Monthly salary: ");
             double monthlySalary;
             try {
@@ -105,11 +104,9 @@ public class EmployeePayslipManagement {
                 throw new InputMismatchException("Invalid data provided. Only number values allowed.");
             }
             reader.nextLine();
-            employee = new NonFacultyEmployee(ID, firstName, lastName, departmentName);
             employeePayslip = new NonFacultyPayslip(employee, totalHoursWorked, monthlySalary);
-        } else {
-            throw new InvalidChoiceException("Employee type can only be a Faculty or a Non-Faculty");
         }
+
         return employeePayslip;
     }
 

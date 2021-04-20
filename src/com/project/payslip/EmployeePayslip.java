@@ -8,7 +8,6 @@ public abstract class EmployeePayslip {
     private Employee employee;
     protected double totalHoursWorked;
     protected static final double FULL_TIME_HOURS = 160;
-    protected double hourlyRate;
 
     public EmployeePayslip() {
     }
@@ -20,10 +19,6 @@ public abstract class EmployeePayslip {
 
     public Employee getEmployee() {
         return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public double getHealthSurchargeFee() {
@@ -40,13 +35,17 @@ public abstract class EmployeePayslip {
 
     }
 
+    public double getDeductions() {
+        return getIncomeTaxAmount() + getHealthSurchargeFee();
+    }
+
+    public double getNetSalary() {
+        return getGrossSalary() - getDeductions();
+    }
+
     public abstract double getHourlyRate();
 
     public abstract double getGrossSalary();
-
-    public double getNetSalary() {
-        return getGrossSalary() - getIncomeTaxAmount() - getHealthSurchargeFee();
-    }
 
     @Override
     public String toString() {
