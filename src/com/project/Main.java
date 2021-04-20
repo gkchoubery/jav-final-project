@@ -1,9 +1,5 @@
 package com.project;
 
-import com.project.exceptions.InvalidChoiceException;
-import com.project.payslip.EmployeePayslip;
-import com.project.utilities.Utils;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

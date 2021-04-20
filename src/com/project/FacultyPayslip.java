@@ -1,7 +1,4 @@
-package com.project.payslip;
-
-import com.project.employee.Employee;
-import com.project.utilities.Utils;
+package com.project;
 
 public class FacultyPayslip extends EmployeePayslip {
 

@@ -1,4 +1,4 @@
-package com.project.utilities;
+package com.project;
 
 public class Utils {
 

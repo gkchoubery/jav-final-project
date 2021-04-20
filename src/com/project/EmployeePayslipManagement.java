@@ -1,11 +1,5 @@
 package com.project;
 
-import com.project.employee.Employee;
-import com.project.exceptions.InvalidChoiceException;
-import com.project.payslip.EmployeePayslip;
-import com.project.payslip.FacultyPayslip;
-import com.project.payslip.NonFacultyPayslip;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;

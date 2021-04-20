@@ -1,6 +1,4 @@
-package com.project.employee;
-
-import com.project.utilities.Utils;
+package com.project;
 
 public class Employee {
 

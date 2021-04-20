@@ -1,13 +1,11 @@
-package com.project.payslip;
-
-import com.project.employee.Employee;
-import com.project.utilities.Utils;
+package com.project;
 
 public abstract class EmployeePayslip {
 
     private Employee employee;
     protected double totalHoursWorked;
     protected static final double FULL_TIME_HOURS = 160;
+    protected static final double TAX_FREE_ALLOWANCE = 2500;
 
     public EmployeePayslip() {
     }
@@ -30,8 +28,8 @@ public abstract class EmployeePayslip {
     }
 
     public double getIncomeTaxAmount() {
-        if (getGrossSalary() < 2500) return 0;
-        return (getGrossSalary() - 2500) * 0.25;
+        if (getGrossSalary() < TAX_FREE_ALLOWANCE) return 0;
+        return (getGrossSalary() - TAX_FREE_ALLOWANCE) * 0.25;
 
     }
 
