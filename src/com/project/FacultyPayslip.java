@@ -41,7 +41,8 @@ public class FacultyPayslip extends EmployeePayslip {
                 Utils.rightPad("Teaching Allowance: ", Utils.LEFT_HEADING_LENGTH) + "$" + getTeachingAllowance() +
                 "\n" +
                 Utils.rightPad("Highest Qualification: ", Utils.LEFT_HEADING_LENGTH) + getFullHighestQualification() +
-                "\n" +
-                "\n\n\n";
+                "\n\n" +
+                outputString() +
+                "\n\n";
     }
 }
